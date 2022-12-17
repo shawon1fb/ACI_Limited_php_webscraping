@@ -2,7 +2,7 @@
 
 include "simple_html_dom.php";
 
-$url = 'https://medex.com.bd/companies/2/aci-limited/brands';
+//$url = 'https://medex.com.bd/companies/2/aci-limited/brands';
 $url = 'data.html';
 
 //
