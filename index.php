@@ -35,9 +35,13 @@ function getProductsFromUrl($url)
 {
 
     $context = stream_context_create();
-    stream_context_set_params($context, array('user_agent' => 'PostmanRuntime/7.30.0'));
+    stream_context_set_params($context, array(
+        'user_agent' => 'PostmanRuntime/7.30.0',
+        'Cookie' => 'XSRF-TOKEN=eyJpdiI6IlhDT1Ewd0ZXbjd3V3JVTmtIQ3JHOWc9PSIsInZhbHVlIjoiaElRaU5IRDIybmsyaERaa1J1Ny9HZDBoOUpUUDVmUGgzSkhRRzdUUDRRTFhPaC80UWdTZHlFZzNKVVdSTU1RQzZNcXJrS3VmbVhMdmx5U3FhcHZvRzNUM0VqZjMrQmVaK3BkR0JlLzNIencxb0l3S3ZDYUwzeE9veHFLc1g2TTQiLCJtYWMiOiJmZjE2OTU4Mjc0YWI2ZTEzZWNjN2E5YzdiYmE4NTY0NTE1OTAyNmU5ZmM0YjRkN2I1MGQzZTE4NjQ1MDBjNmY4In0%3D; medex_session=eyJpdiI6IlV4cnVQWFJvSUFIMFRnbkNWbmhFdVE9PSIsInZhbHVlIjoiTk5TNndqSlZOQVBQQklXTWxNMnE2UEJnbkhyTERYM09ZZVBCcEYzRGI3bitYZkZOS1BEdERkczZNTGE0cERwNVRady9oU2c3NmtJbkZRUFBLeHJZT0JUNHRHdzBqZzIyWk1wQVhXN2tVZG5aTVdaUEJWcjF0TjMwZGtQSVZxU0QiLCJtYWMiOiIzN2EzZjdiZDNlZDI4ODdhZjlkOWE3ZmNhM2Q2N2YzNTJmZDg5OGQzN2IyZDU3YTVlYmViNzExOGZjNDYyYjg0In0%3D',
+
+    ));
 //    $html = file_get_html('data.html');
-    $html = file_get_html($url,0, $context);
+    $html = file_get_html($url, 0, $context);
 
     $divs = $html->find("div[class='col-xs-12 col-sm-6 col-lg-4']");
 
@@ -105,7 +109,7 @@ function parseAllProducts($url)
     foreach ($links as $key => $link) {
 
         echo "$link" . PHP_EOL;
-        sleep(5);
+        sleep(3);
         $temp = getProductsFromUrl($link);
 //        echo json_encode($temp);
         file_put_contents("output_$key.json", json_encode($temp));
